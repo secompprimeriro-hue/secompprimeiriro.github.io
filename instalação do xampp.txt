@@ -1,0 +1,220 @@
+---
+
+## 📘 GUIA COMPLETO: Como Instalar o XAMPP e Rodar um Projeto PHP
+
+> 🎥 **VÍDEO DE APOIO (Configuração do Ambiente PHP):**
+> **Assista primeiro:** [Seu servidor PHP no Linux - @CursoemVideo de PHP - Gustavo Guanabara](https://www.youtube.com/watch?v=aUN0j5Q9quQ)
+> *Este vídeo ensina os fundamentos de um servidor PHP e como configurar o ambiente, essencial para entender o processo. O passo a passo abaixo foca no Windows, mas os conceitos são os mesmos.*
+
+---
+
+### 📋 ÍNDICE
+1. [O que é XAMPP?](#1)
+2. [Download e Instalação do XAMPP](#2)
+3. [Iniciando os Serviços (Apache e MySQL)](#3)
+4. [Onde Colocar Seus Arquivos PHP](#4)
+5. [Criando um Banco de Dados](#5)
+6. [Como Acessar seu Projeto no Navegador](#6)
+7. [Verificando a Conexão com o Banco de Dados](#7)
+8. [Resolução de Problemas Comuns](#8)
+
+---
+
+### 1️⃣ O que é XAMPP? <a name="1"></a>
+
+XAMPP é um pacote que instala e configura automaticamente um **servidor web completo** no seu computador. Ele inclui:
+
+- **Apache** → Servidor web (executa arquivos PHP)
+- **MySQL / MariaDB** → Banco de dados
+- **PHP** → Linguagem de programação
+- **phpMyAdmin** → Interface gráfica para gerenciar o banco de dados
+
+Com ele, você consegue rodar sistemas como o **Grupo Tereza Gastronomia** localmente, sem precisar de internet.
+
+---
+
+### 2️⃣ Download e Instalação do XAMPP <a name="2"></a>
+
+1. **Baixar o XAMPP:**
+   - Acesse: https://www.apachefriends.org/
+   - Clique em **"Download"** para Windows (a versão mais recente com PHP 8.x)
+
+2. **Instalar:**
+   - Execute o arquivo baixado
+   - Clique em **"Next"** em todas as telas
+   - **IMPORTANTE:** Quando perguntar os componentes, mantenha marcado pelo menos:
+     - ✅ Apache
+     - ✅ MySQL
+     - ✅ PHP
+     - ✅ phpMyAdmin
+   - Na tela de pasta de instalação, deixe o padrão: `C:\xampp`
+   - Clique em **"Next"** e depois **"Install"**
+
+3. **Concluir a instalação:**
+   - Após finalizar, mantenha a opção **"Start Control Panel"** marcada
+   - Clique em **"Finish"**
+
+> ⚠️ **Importante:** Se você tiver o Skype ou outras aplicações que usam a porta 80, elas podem conflitar com o Apache. Feche esses programas ou configure o XAMPP para usar outra porta.
+
+---
+
+### 3️⃣ Iniciando os Serviços (Apache e MySQL) <a name="3"></a>
+
+1. Abra o **Painel de Controle do XAMPP** (deve ter aberto automaticamente)
+2. Clique no botão **"Start"** ao lado de:
+   - **Apache** (servidor web)
+   - **MySQL** (banco de dados)
+
+3. Após iniciar, você verá os nomes ficarem verdes e a porta ao lado (ex: Apache no port 80/443; MySQL na 3306).
+
+![XAMPP Painel](https://i.imgur.com/example.png) *(imagem ilustrativa)*
+
+✅ **Verificação:** Abra o navegador e digite `http://localhost`. Deve aparecer a tela padrão do XAMPP.
+
+---
+
+### 4️⃣ Onde Colocar Seus Arquivos PHP <a name="4"></a>
+
+Dentro da pasta onde o XAMPP foi instalado (`C:\xampp`), existe uma subpasta chamada **`htdocs`**. É **DENTRO DELA** que você deve colocar seus projetos PHP.
+
+**Estrutura de pastas recomendada para o projeto Tereza Gastronomia:**
+
+```
+C:\xampp\htdocs\
+└── teresa_gastronomia\          (PASTA DO PROJETO)
+    ├── index.html
+    ├── public\
+    │   └── index.php
+    ├── app\
+    ├── config\
+    └── sql\
+```
+
+**Como fazer:**
+1. Abra o **Windows Explorer** e navegue até `C:\xampp\htdocs`
+2. Crie uma nova pasta chamada **`teresa_gastronomia`**
+3. Copie todos os arquivos do projeto para dentro dela
+4. Cole o conteúdo mantendo a estrutura de pastas original
+
+> 💡 **Dica:** Se você não tem o projeto ainda, baixe do GitHub e extraia dentro do `htdocs`.
+
+---
+
+### 5️⃣ Criando um Banco de Dados <a name="5"></a>
+
+1. Abra o navegador e acesse: `http://localhost/phpmyadmin`
+
+2. Clique em **"Novo"** no menu lateral esquerdo
+
+3. Digite o nome do banco de dados: **`teresa_gastronomia`**
+   - Escolha o collation: `utf8_general_ci`
+   - Clique em **"Criar"**
+
+4. Agora, clique no nome do banco que acabou de criar (no menu esquerdo)
+
+5. Clique na aba **"Importar"** (no topo)
+
+6. Clique em **"Escolher arquivo"** e selecione o arquivo:
+   - `C:\xampp\htdocs\teresa_gastronomia\sql\database.sql`
+
+7. Role a página até o final e clique em **"Importar"**
+
+✅ **Pronto!** As tabelas e dados iniciais foram criados automaticamente.
+
+---
+
+### 6️⃣ Como Acessar seu Projeto no Navegador <a name="6"></a>
+
+Seu projeto estará disponível em:
+
+```
+http://localhost/nome_da_pasta_do_projeto/public/
+```
+
+**No exemplo do Grupo Tereza Gastronomia:**
+
+```
+http://localhost/teresa_gastronomia/public/index.php
+```
+
+**Se você tem um arquivo index.html na raiz do projeto, pode acessar diretamente:**
+
+```
+http://localhost/teresa_gastronomia/
+```
+
+---
+
+### 7️⃣ Verificando a Conexão com o Banco de Dados <a name="7"></a>
+
+O arquivo `config/database.php` do projeto já vem configurado para usar as configurações padrão do XAMPP:
+
+```php
+private $host = "localhost";
+private $db_name = "teresa_gastronomia";
+private $username = "root";
+private $password = "";
+```
+
+- **Usuário padrão do MySQL no XAMPP:** `root`
+- **Senha:** vazia (deixe o campo sem nada)
+
+Se você alterou a senha do MySQL durante a instalação, atualize o arquivo.
+
+**Como testar se a conexão está funcionando:**
+- Acesse o sistema pelo navegador
+- Tente fazer login com as credenciais:
+  - Matriz: `admin@teresa.com` / `admin123`
+  - Filial: `crato@teresa.com` / `filial123`
+
+Se o login funcionar, o banco de dados está conectado corretamente! ✅
+
+---
+
+### 8️⃣ Resolução de Problemas Comuns <a name="8"></a>
+
+| Problema | Solução |
+|----------|---------|
+| **Apache não inicia (porta 80 ocupada)** | Abra o XAMPP Control Panel, clique em Config → Apache → httpd.conf, mude "Listen 80" para "Listen 8080". Depois acesse `http://localhost:8080` |
+| **MySQL não inicia** | O Skype usa a porta 3306. Feche o Skype ou vá em Config → MySQL → my.ini e mude a porta para 3307 |
+| **Erro 404 - Página não encontrada** | Verifique se a pasta do projeto está dentro de `htdocs` e se o nome está correto na URL |
+| **Erro de acesso negado ao MySQL** | Abra o phpMyAdmin, vá em Contas de usuário e redefina a senha do root para vazia |
+| **Nada aparece na tela (tela branca)** | Ative o display de erros no PHP: edite `php.ini` e mude `display_errors = On` |
+| **Erro de conexão com banco de dados** | Verifique se o MySQL está rodando (verde no painel do XAMPP) e se o arquivo `database.php` tem os dados corretos |
+
+---
+
+### 🎯 Resumo Rápido
+
+```bash
+1. Instale o XAMPP
+2. Inicie Apache e MySQL
+3. Copie seu projeto para htdocs
+4. Crie o banco de dados no phpMyAdmin
+5. Importe o arquivo .sql
+6. Acesse: http://localhost/pasta_do_projeto/
+```
+
+---
+
+### 📚 Links Úteis
+
+- 🎥 **Vídeo do Curso em Vídeo:** [Seu servidor PHP no Linux](https://www.youtube.com/watch?v=aUN0j5Q9quQ)
+- 📥 **Download do XAMPP:** https://www.apachefriends.org/
+- 🐘 **Documentação oficial do PHP:** https://www.php.net/
+
+---
+
+### ❓ Ainda com dúvidas?
+
+Verifique se:
+- O Apache e MySQL estão verdes no painel do XAMPP
+- Os arquivos estão dentro da pasta `htdocs`
+- Você importou o arquivo SQL corretamente
+- Digitou a URL correta no navegador
+
+---
+
+**✨ Com este guia, você conseguirá instalar o XAMPP e rodar qualquer sistema PHP (incluindo o Grupo Tereza Gastronomia) no seu computador!** 🚀
+
+> **Arquivo salvo como:** `INSTALACAO_XAMPP_PASSO_A_PASSO.txt`
