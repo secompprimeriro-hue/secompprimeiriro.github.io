@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 08/05/2026 às 23:28
+-- Tempo de geração: 09/05/2026 às 01:22
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -223,7 +223,8 @@ CREATE TABLE `vendas` (
 --
 
 INSERT INTO `vendas` (`id`, `filial_id`, `produto_id`, `quantidade`, `valor_unitario`, `valor_total`, `data_venda`) VALUES
-(1, NULL, 1, 25, 5.00, 125.00, '2026-05-08 22:11:20');
+(1, NULL, 1, 25, 5.00, 125.00, '2026-05-08 22:11:20'),
+(2, NULL, 4, 3, 32.00, 96.00, '2026-05-09 00:12:41');
 
 --
 -- Índices para tabelas despejadas
@@ -338,7 +339,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para tabelas despejadas
